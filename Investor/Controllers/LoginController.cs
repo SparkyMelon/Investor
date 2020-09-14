@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Investor.Controllers
 {
-    public class HelloWorldController : Controller
+    public class LoginController : Controller
     {
         public IActionResult Index()
         {
