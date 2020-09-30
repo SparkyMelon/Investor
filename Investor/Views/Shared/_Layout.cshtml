@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -27,7 +29,14 @@
                     </ul>
                 </div>
                 <form class="form-inline my-2 my-lg-0">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginSignupModal">Log in / Sign up</button>
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("Username") != null && HttpContextAccessor.HttpContext.Session.GetString("Username") != "")
+                    {
+                        <p>Hello, @HttpContextAccessor.HttpContext.Session.GetString("Username")</p>
+                    }
+                    else
+                    {
+                        <button class="btn btn-inv my-2 my-sm-0" type="button" onclick="window.location.href='@Url.Action("Index", "Login")'">Log in / Sign up</button>
+                    }
                 </form>
             </div>
         </nav>
@@ -39,31 +48,102 @@
     </div>
 
     <!--Login modal-->
-    <div id="loginSignupModal" class="modal" tabindex="-1" role="dialog">
+    <!--<div id="loginSignupModal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Log in / Sign up</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="loginUsernameEmail">Username / Email address</label>
-                            <input type="text" class="form-control" id="loginUsernameEmail" placeholder="Username / Email address" />
+            <div class="modal-content">-->
+                @*<div class="modal-header">
+                        <h5 class="modal-title">Log in / Sign up</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>*@
+                <!--<div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-7 rightBorderDark">
+                                <h3 class="fontHeavy">Sign up</h3>
+                                <br />
+                                <form>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group formInput">
+                                                <label for="registerEmail">Email</label>
+                                                <input type="text" class="form-control" id="registerEmail" />
+                                                <div class="invalid-feedback">
+                                                    Invalid Email address
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group formInput">
+                                                <label for="registerUsername">Username</label>
+                                                <input type="text" class="form-control" id="registerUsername" />
+                                                <div class="invalid-feedback">
+                                                    Must be between 3 and 24 characters
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group formInput marginBotSm">
+                                                <label for="registerPassword">Password</label>
+                                                <input type="password" class="form-control" id="registerPassword" />
+                                                <div class="invalid-feedback">
+                                                    Must contain an uppercase letter, a lowercase letter, a number and be 8 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group formInput marginBotSm">
+                                                <label for="registerConfirmPassword">Confirm password</label>
+                                                <input type="password" class="form-control" id="registerConfirmPassword" />
+                                                <div class="invalid-feedback">
+                                                    Passwords do not match
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-check marginBotMd">
+                                        <input class="form-check-input" type="checkbox" id="companyRadio" value="Company" />
+                                        <label class="form-check-label" for="companyRadio">
+                                            Check this box if you are a company looking for investors
+                                        </label>
+                                    </div>
+                                    <button id="registerBtn" type="button" class="btn btn-inv">Register</button>
+                                </form>
+                            </div>
+                            <div class="col-5">
+                                <h3 class="fontHeavy">Log in</h3>
+                                <br />
+                                <form>
+                                    <div class="form-group formInput">
+                                        <label for="loginUsernameEmail">Username / Email address</label>
+                                        <input type="text" class="form-control" id="loginUsernameEmail" />
+                                        <div class="invalid-feedback">
+                                            Username / Email address does not exist
+                                        </div>
+                                    </div>
+                                    <div class="form-group formInput marginBotSm">
+                                        <label for="loginPassword">Password</label>
+                                        <input type="password" class="form-control" id="loginPassword" />
+                                        <div class="invalid-feedback">
+                                            Incorrect password
+                                        </div>
+                                    </div>
+                                    <p class="forgotPwTxt">Forgot your <a href="#">password?</a></p>
+                                    <button id="loginBtn" type="button" class="btn btn-inv">Log in</button>
+                                </form>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="loginPassword">Password</label>
-                            <input type="password" class="form-control" id="loginPassword" placeholder="Password" />
-                        </div>
-                        <button type="submit" class="btn btn-success">Log in</button>
-                    </form>
+                    </div>
+
+
+
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <footer class="border-top footer text-muted">
         <div class="container">
