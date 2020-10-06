@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Investor.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Investor.Controllers
 {
@@ -18,8 +19,17 @@ namespace Investor.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(bool logout = false)
         {
+            HttpContext.Session.SetString("Username", "SparkyMelon");
+            HttpContext.Session.SetInt32("Id", 1);
+
+            if (logout)
+            {
+                HttpContext.Session.SetString("Username", "");
+                HttpContext.Session.SetInt32("Id", -1);
+            }
+
             return View();
         }
 

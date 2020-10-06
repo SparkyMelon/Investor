@@ -96,15 +96,18 @@ namespace Investor.Controllers
         {
             List<Account> accounts = _context.Account.ToList();
             string actualUsername = "";
+            int id = 0;
 
             foreach (Account account in accounts)
             {
                 if (usernameEmail == account.Email || usernameEmail == account.Username)
                 {
                     actualUsername = account.Username;
+                    id = account.Id;
                 }
             }
 
+            HttpContext.Session.SetInt32("Id", id);
             HttpContext.Session.SetString("Username", actualUsername);
             
             return RedirectToAction("Index", "Home");

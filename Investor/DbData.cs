@@ -86,7 +86,7 @@ namespace Investor
 
         public void CheckDatabase()
         {
-            if (!DoesTableExist("ACCOUNT"))
+            if (!DoesTableExist("ACCOUNT")) //TODO: Get rid of COMPANY column
             {
                 string sql = @"
                     CREATE TABLE ACCOUNT (

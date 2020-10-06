@@ -11,9 +11,9 @@
     @using Microsoft.AspNetCore.Http
     @inject IHttpContextAccessor HttpContextAccessor
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow mb-3 headerFooterColour">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Investor</a>
+                <a class="navbar-brand whiteText" asp-area="" asp-controller="Home" asp-action="Index">Investor</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,21 +21,30 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link whiteText" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        @*<li class="nav-item">
+                            <a class="nav-link whiteText" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>*@
                     </ul>
                 </div>
                 <form class="form-inline my-2 my-lg-0">
                     @if (HttpContextAccessor.HttpContext.Session.GetString("Username") != null && HttpContextAccessor.HttpContext.Session.GetString("Username") != "")
                     {
-                        <p>Hello, @HttpContextAccessor.HttpContext.Session.GetString("Username")</p>
+                        <div class="dropdown">
+                            <button class="btn btn-inv dropdown-toggle rounded" type="button" id="profileDropdownButton" data-toggle="dropdown">
+                                @HttpContextAccessor.HttpContext.Session.GetString("Username")
+                            </button>
+                            <div class="dropdown-menu" id="profileDropdownMenu">
+                                <a class="dropdown-item" onclick="window.location.href='@Url.Action("Index", "Profile")'">Profile</a>
+                                <a class="dropdown-item" onclick="window.location.href='@Url.Action("Index", "Home", new { logout = true})'">Logout</a>
+                            </div>
+                        </div>
                     }
                     else
                     {
-                        <button class="btn btn-inv my-2 my-sm-0" type="button" onclick="window.location.href='@Url.Action("Index", "Login")'">Log in / Sign up</button>
+                        @*<button class="btn btn-inv my-2 my-sm-0 rounded" type="button" onclick="window.location.href='@Url.Action("LoginSuccess", "Login", new { usernameEmail = "SparkyMelon" })'">Quick log in</button>*@
+                        <button class="btn btn-inv my-2 my-sm-0 rounded" type="button" onclick="window.location.href='@Url.Action("Index", "Login")'">Log in / Sign up</button>
                     }
                 </form>
             </div>
@@ -145,11 +154,11 @@
         </div>
     </div>-->
 
-    <footer class="border-top footer text-muted">
+    @*<footer class="footer text-muted headerFooterColour">
         <div class="container">
             &copy; 2020 - Investor - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

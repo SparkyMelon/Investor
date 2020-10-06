@@ -127,3 +127,61 @@ $("#loginBtn").click(function () {
         }
     });
 });
+
+//Dragging logic
+$(".profileSubContainerItem").mousedown(function (e) {
+    e.preventDefault();
+});
+$(".profileSubContainerItem").mouseup(function (e) {
+    e.preventDefault();
+});
+$(".profileSubContainerItem").mousemove(function (e) {
+    e.preventDefault();
+});
+
+var mouseDown = false;
+var mouseX = 0;
+$(".profileSubContainer").mousedown(function (e) {
+    mouseDown = true;
+    mouseX = e.pageX;
+});
+
+$(".profileSubContainer").mouseup(function (e) {
+    mouseDown = false;
+});
+
+$(".profileSubContainer").mousemove(function (e) {
+    if (mouseDown) {
+        if (mouseX != e.pageX) {
+            scrollProfileSubContainer($(this), e.pageX - mouseX);
+            mouseX = e.pageX;
+        }
+    }
+});
+
+$(".profileSubContainer").mouseleave(function () {
+    mouseDown = false;
+});
+
+function scrollProfileSubContainer($container, moveAmount) {
+    var minX = -910;
+    var maxX = 0;
+
+    if ($container.css("left") == null) {
+        $container.css("left", "0px");
+    }
+    var curLeft = $container.css("left");
+    curLeft = Number(curLeft.substring(0, curLeft.length - 2));
+    if (curLeft == NaN) {
+        alert("Oops..");
+    }
+    curLeft = curLeft + moveAmount;
+
+    if (curLeft > maxX) {
+        curLeft = maxX;
+    } else if (curLeft < minX) {
+        curLeft = minX
+    }
+
+    $container.css("left", curLeft + "px");
+}

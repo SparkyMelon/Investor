@@ -3,7 +3,11 @@
 }
 
 body {
-    background-color: #f5f5f5;
+    background-color: #3E3E40;
+}
+
+.whiteText {
+    color: #F2F2F2 !important;
 }
 
 /*Bootstrap changes
@@ -41,14 +45,15 @@ body {
 
 .btn-inv {
     color: white;
-    background-color: #BA63C2;
-    border-color: #BA63C2;
+    background-color: #F2A30F;
+    border-color: #F2A30F;
+    font-weight: 600;
 }
 
     .btn-inv:hover {
         color: white;
-        background-color: #89498F;
-        border-color: #89498F;
+        background-color: #F2B90C;
+        border-color: #F2B90C;
     }
 
 .marginBotSm {
@@ -65,29 +70,80 @@ body {
 /*Container styles
 -------------------------------------------------- */
 #loginContainer {
-    margin-top: 150px;
+    margin-top: 150px; /*Change this to be centered vertically*/
     padding-top: 15px;
     padding-bottom: 15px;
-    background-color: white;
+    background-color: #F2F2F2;
 }
 
-/*Form inputs styles
--------------------------------------------------- */
-.formInput {
-    position: relative;
+#profileContainer {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #F2F2F2;
 }
+
+.profileSubContainer {
+    position: relative;
+    width: 1985px;
+    height: 190px;
+    left: 0px;
+}
+
+.profileSubContainerWrapper {
+    overflow-x: hidden;
+    background-color: #3E3E40;
+    padding: 5px;
+}
+
+.profileSubContainerTitle {
+    margin-bottom: 2px;
+}
+
+.profileSubContainerItem {
+    float: left;
+    width: 320px;
+    height: 180px;
+    background-color: #F2F2F2;
+    margin: 5px;
+}
+
+.headerFooterColour {
+    background-color: #262626;
+}
+
+#profileDropdownButton {
+
+}
+
+#profileDropdownMenu {
+    background-color: #F2A30F;
+}
+
+    #profileDropdownMenu > a {
+        color: white;
+    }
+
+        #profileDropdownMenu > a:hover {
+            background-color: #F2B90C;
+        }
+
+    /*Form inputs styles
+-------------------------------------------------- */
+    .formInput {
+        position: relative;
+    }
 
     .formInput > input {
         border-color: rgb(165, 162, 162);
     }
 
         .formInput > input:focus {
-            box-shadow: 0px 0px 0px 2px rgba(186,99,194, 0.2);
+            box-shadow: 0px 0px 0px 2px rgba(242,185,12, 0.2);
             border-color: #BA63C2;
         }
 
     .formInput > label {
-        background-color: white;
+        /*background-color: #F2F2F2;*/
         color: #6c757d;
         position: absolute;
         top: 8px;
@@ -98,7 +154,7 @@ body {
     }
 
     .formInput > .minid {
-        top: -11px;
+        top: -17px;
         left: 5px;
         font-size: 13px;
     }
@@ -110,10 +166,6 @@ body {
 
 .rightBorderDark {
     border-right: 1px solid rgb(165, 162, 162);
-}
-
-fontHeavy {
-    font-weight: 600;
 }
 
 /*Stuff that was already here*/

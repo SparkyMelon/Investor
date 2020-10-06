@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Profile Page";
+}
+
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<div id="profileContainer" class="container shadow-lg rounded">
+    <h3>@HttpContextAccessor.HttpContext.Session.GetString("Username")'s Profile</h3>
+    <hr/>
+    <div class="row">
+        <div class="col-6">
+            <h4 class="text-center">You have invested</h4>
+            <h1 class="text-center"><b>£0.00</b></h1>
+        </div>
+        <div class="col-6">
+            <h4 class="text-center">You have gained back</h4>
+            <h1 class="text-center"><b>£0.00</b></h1>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-12">
+            <h4 class="profileSubContainerTitle">Investing...</h4>
+            <div class="profileSubContainerWrapper shadow-lg rounded">
+                <div class="profileSubContainer">
+                    <div class="rounded profileSubContainerItem"></div>
+                    <div class="rounded profileSubContainerItem"></div>
+                    <div class="rounded profileSubContainerItem"></div>
+                    <div class="rounded profileSubContainerItem"></div>
+                    <div class="rounded profileSubContainerItem"></div>
+                    <div class="rounded profileSubContainerItem"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h4 class="profileSubContainerTitle">Owned Companies</h4>
+        <div class="container shadow-lg rounded profileSubContainer">
+
+        </div>
+    </div>
+</div>
