@@ -21,6 +21,7 @@ namespace Investor.Controllers
 
         public IActionResult Index(bool logout = false)
         {
+            //For testing purposes
             HttpContext.Session.SetString("Username", "SparkyMelon");
             HttpContext.Session.SetInt32("Id", 1);
 

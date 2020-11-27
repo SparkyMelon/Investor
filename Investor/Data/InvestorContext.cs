@@ -15,5 +15,8 @@ namespace Investor.Data
         }
 
         public DbSet<Account> Account { get; set; }
+        public DbSet<Company> Company { get; set; }
+        public DbSet<Campaign> Campaign { get; set; }
+        public DbSet<Payment> Payment { get; set; }
     }
 }

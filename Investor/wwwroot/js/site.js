@@ -85,7 +85,6 @@ $("#registerBtn").click(function () {
         account.Email = $("#registerEmail").val();
         account.Username = $("#registerUsername").val();
         account.Password = $("#registerPassword").val();
-        account.Company = $("#registerCompany").prop("checked");
 
         ajax("Login/RegisterValidate", { newAccount: account }, function (response) {
             if (response == 0) { //VALID
@@ -164,7 +163,7 @@ $(".profileSubContainer").mouseleave(function () {
 });
 
 function scrollProfileSubContainer($container, moveAmount) {
-    var minX = -910;
+    var minX = -580; //-910 for 6 panels
     var maxX = 0;
 
     if ($container.css("left") == null) {

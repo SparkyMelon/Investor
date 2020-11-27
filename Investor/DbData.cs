@@ -94,8 +94,50 @@ namespace Investor
                         USERNAME varchar(25) NOT NULL,
                         EMAIL varchar(50) NOT NULL,
                         PASSWORD varchar(500) NOT NULL,
-                        SALT binary(32) NOT NULL,
-                        COMPANY bit NOT NULL
+                        SALT binary(32) NOT NULL
+                    )
+                ";
+                SQLQuery(sql);
+            }
+
+            if (!DoesTableExist("COMPANY"))
+            {
+                string sql = @"
+                    CREATE TABLE COMPANY (
+                        ID int IDENTITY(1,1) PRIMARY KEY,
+                        ACCOUNT_ID int NOT NULL,
+                        NAME VARCHAR(25) NOT NULL
+                    )
+                ";
+                SQLQuery(sql);
+            }
+
+            if (!DoesTableExist("CAMPAIGN"))
+            {
+                string sql = @"
+                    CREATE TABLE CAMPAIGN (
+                        ID int IDENTITY(1,1) PRIMARY KEY,
+                        COMPANY_ID int NOT NULL,
+                        DESCRIPTION varchar(50) NOT NULL,
+                        CASH_GOAL DECIMAL(5,2) NOT NULL,
+                        START_DATE DATETIME NOT NULL,
+                        END_DATE DATETIME NOT NULL,
+                        GOAL_REACHED BIT NOT NULL,
+                        SUCCESS BIT
+                    )
+                ";
+                SQLQuery(sql);
+            }
+
+            if (!DoesTableExist("PAYMENT"))
+            {
+                string sql = @"
+                    CREATE TABLE PAYMENT (
+                        ID int IDENTITY(1,1) PRIMARY KEY,
+                        ACCOUNT_ID int NOT NULL,
+                        CAMPAIGN_ID int NOT NULL,
+                        AMOUNT DECIMAL(5,2) NOT NULL,
+                        DATE_PAID DATETIME NOT NULL,
                     )
                 ";
                 SQLQuery(sql);

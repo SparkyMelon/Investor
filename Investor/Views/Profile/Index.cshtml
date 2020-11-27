@@ -5,39 +5,350 @@
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 
-<div id="profileContainer" class="container shadow-lg rounded">
+<div class="profileContainer container shadow-lg marginBotLg">
     <h3>@HttpContextAccessor.HttpContext.Session.GetString("Username")'s Profile</h3>
-    <hr/>
+    <hr />
     <div class="row">
         <div class="col-6">
             <h4 class="text-center">You have invested</h4>
-            <h1 class="text-center"><b>£0.00</b></h1>
+            <h1 class="text-center"><b>£@ViewBag.totalInvested</b></h1>
         </div>
         <div class="col-6">
             <h4 class="text-center">You have gained back</h4>
             <h1 class="text-center"><b>£0.00</b></h1>
         </div>
     </div>
-    <hr />
+ </div>
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link f2Color linkColorFix active" data-toggle="tab" href="#investingTab">Investing</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link f2Color linkColorFix" data-toggle="tab" href="#startedTab">Started</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link f2Color linkColorFix" data-toggle="tab" href="#companiesTab">Companies owned</a>
+    </li>
+</ul>
+<!--Div soup needs fixing-->
+<div class="tab-content f2Color">
+    <div class="tab-pane fade show active" id="investingTab" role="tabpanel">
+        <div class="container profileContainer shadow-lg">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="profileSubContainerTitle">Campaigns investing in...</h4>
+                    <ul class="pagination justify-content-end marginBotSm">
+                        <li class="page-item disabled">
+                            <a class="page-link paginationBtn" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link paginationBtn" href="#">1</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link paginationBtn" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link paginationBtn" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link paginationBtn" href="#">Next</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                @for (int i = 0; i < (ViewBag.campaignsInvestingIn.Count <= 3 ? ViewBag.campaignsInvestingIn.Count : 3); i++)
+                {
+                    <div class="col-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">@ViewBag.campaignsInvestingIn[i].CompanyName</h5>
+                                <p class="card-text">@ViewBag.campaignsInvestingIn[i].Description</p>
+                                <h5><b>£@ViewBag.campaignsInvestingIn[i].CashCurrent / £@ViewBag.campaignsInvestingIn[i].CashGoal</b></h5>
+                                <div class="progress marginBotMd">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: @(ViewBag.campaignsInvestingIn[i].CashCurrent / ViewBag.campaignsInvestingIn[i].CashGoal * 100)%"></div>
+                                </div>
+                                <button type="button" class="btn btn-inv ">See more</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="startedTab" role="tabpanel">
+        <div class="container profileContainer shadow-lg">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="profileSubContainerTitle">Campaigns started...</h4>
+                    <a class="profileSubContainerSeeAllLink" href="#">See all</a>
+                </div>
+            </div>
+            <div class="row">
+                @for (int i = 0; i < (ViewBag.campaignsStarted.Count <= 3 ? ViewBag.campaignsStarted.Count : 3); i++)
+                {
+                    <div class="col-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">@ViewBag.campaignsStarted[i].CompanyName</h5>
+                                <p class="card-text">@ViewBag.campaignsStarted[i].Description</p>
+                                <h5><b>£@ViewBag.campaignsStarted[i].CashCurrent / £@ViewBag.campaignsStarted[i].CashGoal</b></h5>
+                                <div class="progress marginBotMd">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: @(ViewBag.campaignsStarted[i].CashCurrent / ViewBag.campaignsStarted[i].CashGoal * 100)%"></div>
+                                </div>
+                                <button type="button" class="btn btn-inv ">See more</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="companiesTab" role="tabpanel">
+        <div class="container profileContainer shadow-lg">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="profileSubContainerTitle">Owned companies</h4>
+                    <a class="profileSubContainerSeeAllLink" href="#">See all</a>
+                </div>
+            </div>
+            <div class="row">
+                @for (int i = 0; i < (ViewBag.companiesOwned.Count <= 3 ? ViewBag.companiesOwned.Count : 3); i++)
+                {
+                    <div class="col-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">@ViewBag.companiesOwned[i].Name</h5>
+                                <button type="button" class="btn btn-inv ">See more</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="container profileContainer shadow-lg">
     <div class="row">
         <div class="col-12">
-            <h4 class="profileSubContainerTitle">Investing...</h4>
-            <div class="profileSubContainerWrapper shadow-lg rounded">
+            <h4 class="profileSubContainerTitle">Campaigns investing in...</h4>
+            <a class="profileSubContainerSeeAllLink" href="#">See all</a>
+        </div>
+    </div>
+    <div class="row">
+        @for (int i = 0; i < (ViewBag.campaignsInvestingIn.Count <= 3 ? ViewBag.campaignsInvestingIn.Count : 3); i++)
+        {
+            <div class="col-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">@ViewBag.campaignsInvestingIn[i].CompanyName</h5>
+                        <p class="card-text">@ViewBag.campaignsInvestingIn[i].Description</p>
+                        <h5><b>£@ViewBag.campaignsInvestingIn[i].CashCurrent / £@ViewBag.campaignsInvestingIn[i].CashGoal</b></h5>
+                        <div class="progress marginBotMd">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: @(ViewBag.campaignsInvestingIn[i].CashCurrent / ViewBag.campaignsInvestingIn[i].CashGoal * 100)%"></div>
+                        </div>
+                        <button type="button" class="btn btn-inv ">See more</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-12">
+            <h4 class="profileSubContainerTitle">Campaigns started...</h4>
+            <a class="profileSubContainerSeeAllLink" href="#">See all</a>
+        </div>
+    </div>
+    <div class="row">
+        @for (int i = 0; i < (ViewBag.campaignsStarted.Count <= 3 ? ViewBag.campaignsStarted.Count : 3); i++)
+        {
+            <div class="col-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">@ViewBag.campaignsStarted[i].CompanyName</h5>
+                        <p class="card-text">@ViewBag.campaignsStarted[i].Description</p>
+                        <h5><b>£@ViewBag.campaignsStarted[i].CashCurrent / £@ViewBag.campaignsStarted[i].CashGoal</b></h5>
+                        <div class="progress marginBotMd">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: @(ViewBag.campaignsStarted[i].CashCurrent / ViewBag.campaignsStarted[i].CashGoal * 100)%"></div>
+                        </div>
+                        <button type="button" class="btn btn-inv ">See more</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-12">
+            <h4 class="profileSubContainerTitle">Owned companies</h4>
+            <a class="profileSubContainerSeeAllLink" href="#">See all</a>
+        </div>
+    </div>
+    <div class="row">
+        @for (int i = 0; i < (ViewBag.companiesOwned.Count <= 3 ? ViewBag.companiesOwned.Count : 3); i++)
+        {
+            <div class="col-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">@ViewBag.companiesOwned[i].Name</h5>
+                        <button type="button" class="btn btn-inv ">See more</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>*@
+
+
+
+
+
+
+
+
+
+
+    @*<div class="row">
+        <div class="col-12">
+            <h4 class="profileSubContainerTitle">Campaigns investing in...</h4>
+            <a class="profileSubContainerSeeAllLink" href="#">See all</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="profileSubContainerWrapper shadow-lg ">
                 <div class="profileSubContainer">
-                    <div class="rounded profileSubContainerItem"></div>
-                    <div class="rounded profileSubContainerItem"></div>
-                    <div class="rounded profileSubContainerItem"></div>
-                    <div class="rounded profileSubContainerItem"></div>
-                    <div class="rounded profileSubContainerItem"></div>
-                    <div class="rounded profileSubContainerItem"></div>
+                    @for (int i = 0; i < ViewBag.campaignsInvestingIn.Count; i++)
+                    {
+                        <div class="container  profileSubContainerItem">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 class="text-center campaignName">@ViewBag.campaignsInvestingIn[i].CompanyName</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="campaignIcon" style="width: 80px; height: 80px; background-color: maroon;"></div>
+                                </div>
+                                <div class="col-8">
+                                    <p class="campaignDesc" style="height: 80px; margin-bottom: 0px;">@ViewBag.campaignsInvestingIn[i].Description</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 class="text-center campaignMoney" style="margin-top: 10px;"><b>£@ViewBag.campaignsInvestingIn[i].CashCurrent / £@ViewBag.campaignsInvestingIn[i].CashGoal</b></h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: @(ViewBag.campaignsInvestingIn[i].CashCurrent / ViewBag.campaignsInvestingIn[i].CashGoal * 100)%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class=" profileSubContainerItem">
+                            <h3 class="text-center">See more here...</h3>
+                        </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <h4 class="profileSubContainerTitle">Owned Companies</h4>
-        <div class="container shadow-lg rounded profileSubContainer">
 
+    <div class="row">
+        <div class="col-12">
+            <h4 class="profileSubContainerTitle">Campaigns started...</h4>
+            <a class="profileSubContainerSeeAllLink" href="#">See all</a>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="profileSubContainerWrapper shadow-lg ">
+                <div class="profileSubContainer">
+                    @for (int i = 0; i < ViewBag.campaignsStarted.Count; i++)
+                    {
+                        <div class="container  profileSubContainerItem">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 class="text-center campaignName">@ViewBag.campaignsStarted[i].CompanyName</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="campaignIcon" style="width: 80px; height: 80px; background-color: maroon;"></div>
+                                </div>
+                                <div class="col-8">
+                                    <p class="campaignDesc" style="height: 80px; margin-bottom: 0px;">@ViewBag.campaignsStarted[i].Description</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 class="text-center campaignMoney" style="margin-top: 10px;"><b>£@ViewBag.campaignsStarted[i].CashCurrent / £@ViewBag.campaignsStarted[i].CashGoal</b></h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: @(ViewBag.campaignsStarted[i].CashCurrent / ViewBag.campaignsStarted[i].CashGoal * 100)%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class=" profileSubContainerItem">
+                            <h3 class="text-center">See more here...</h3>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h4 class="profileSubContainerTitle">Owned companies</h4>
+            <a class="profileSubContainerSeeAllLink" href="#">See all</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="profileSubContainerWrapper shadow-lg ">
+                <div class="profileSubContainer">
+                    @for (int i = 0; i < ViewBag.companiesOwned.Count; i++)
+                    {
+                        <div class="container  profileSubContainerItem">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 class="text-center companyName">@ViewBag.companiesOwned[i].Name</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4"></div>
+                                <div class="col-4">
+                                    <div class="companyIcon" style="width: 80px; height: 80px; background-color: maroon;"></div>
+                                </div>
+                                <div class="col-4"></div>
+                            </div>
+                        </div>
+                    }
+                    <div class=" profileSubContainerItem">
+                            <h3 class="text-center">See more here...</h3>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
 </div>
